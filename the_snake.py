@@ -46,7 +46,7 @@ clock = pygame.time.Clock()
 class GameObject:
     """Базовый класс игровых объектов."""
 
-    def __init__(self, position, body_color):
+    def __init__(self, position=(0, 0), body_color=(255, 255, 255)):
         self.position = position
         self.body_color = body_color
 
@@ -58,7 +58,7 @@ class GameObject:
 class Apple(GameObject):
     """Базовый класс объекта яблока."""
 
-    def __init__(self, position):
+    def __init__(self, position=(0, 0)):
         super().__init__(position, body_color=APPLE_COLOR)
 
     def randomize_position(self):
@@ -78,7 +78,7 @@ class Apple(GameObject):
 class Snake(GameObject):
     """Базовый класс объекта змейка."""
 
-    def __init__(self, position):
+    def __init__(self, position=(0, 0)):
         super().__init__(position, body_color=SNAKE_COLOR)
         self.length = 1
         self.positions = [position]
@@ -140,7 +140,7 @@ class Snake(GameObject):
 class Stone(GameObject):
     """Базовый класс объета камень, cлужит как припятствие."""
 
-    def __init__(self, position):
+    def __init__(self, position=(0, 0)):
         super().__init__(position, body_color=STONE_COLOR)
 
     def randomize_position(self):
