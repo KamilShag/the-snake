@@ -179,10 +179,8 @@ def main():
     """Запуск игры «Змейка»."""
     pg.init()
     snake = Snake()
-    occupied_positions = [snake.get_head_position()]
-
-    apple = Apple(occupied_positions=occupied_positions)
-    occupied_positions.append(apple.position)
+    apple = Apple(occupied_positions=[snake.get_head_position()])
+    occupied_positions = [snake.get_head_position(), apple.position]
 
     stones = [
         GameObject(body_color=STONE_COLOR)
