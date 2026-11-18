@@ -184,12 +184,13 @@ def main():
     apple = Apple(occupied_positions=occupied_positions)
     occupied_positions.append(apple.position)
 
-    stones = []
-    for _ in range(randint(0, 10)):
-        stone = GameObject(body_color=STONE_COLOR)
+    stones = [
+        GameObject(body_color=STONE_COLOR)
+        for _ in range(randint(0, 10))
+    ]
+    for stone in stones:
         stone.randomize_position(occupied_positions)
         occupied_positions.append(stone.position)
-        stones.append(stone)
 
     screen.fill(BOARD_BACKGROUND_COLOR)
 
