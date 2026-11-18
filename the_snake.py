@@ -203,9 +203,13 @@ def main():
 
         if head_position == apple.position:
             snake.length += 1
-            occupied_positions = snake.positions[:]
+            occupied_positions = (
+                snake.positions[:]
+                + [stone.position for stone in stones]
+            )
             apple.randomize_position(occupied_positions)
             occupied_positions.append(apple.position)
+
         elif (head_position in snake.positions[1:]
               or head_position in [stone.position for stone in stones]):
             snake.reset()
