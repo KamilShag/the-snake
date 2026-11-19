@@ -78,10 +78,16 @@ class GameObject:
             'Переопределите метод draw, в дочерних классах GameObject'
         )
 
+
+class Apple(GameObject):
+    """Базовый класс объекта яблока."""
+
+    def __init__(self, occupied_positions=None, body_color=APPLE_COLOR):
+        super().__init__(body_color=body_color)
+        self.randomize_position(occupied_positions or [])
+
     def randomize_position(self, occupied_positions=None):
         """Перемещает объект в случайную свободную клетку поля."""
-        if occupied_positions is None:
-            occupied_positions = []
         while True:
             self.position = (
                 randint(0, GRID_WIDTH - 1) * GRID_SIZE,
@@ -90,14 +96,6 @@ class GameObject:
 
             if self.position not in occupied_positions:
                 break
-
-
-class Apple(GameObject):
-    """Базовый класс объекта яблока."""
-
-    def __init__(self, occupied_positions=None):
-        super().__init__(body_color=APPLE_COLOR)
-        self.randomize_position(occupied_positions)
 
     def draw(self):
         """Отрисовывает яблоко на игровом поле."""
@@ -138,7 +136,7 @@ class Snake(GameObject):
         """Возвращает змейку в начальное состояние."""
         self.length = 1
         self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
-        self.direction = choice([UP, DOWN, LEFT, RIGHT])
+        self.direction = RIGHT
         self.last = None
 
     def draw(self):
@@ -183,14 +181,12 @@ def main():
     occupied_positions = [snake.get_head_position(), apple.position]
 
     stones = [
-        GameObject(body_color=STONE_COLOR)
+        Apple(body_color=STONE_COLOR)
         for _ in range(randint(0, 10))
     ]
     for stone in stones:
         stone.randomize_position(occupied_positions)
         occupied_positions.append(stone.position)
-
-    screen.fill(BOARD_BACKGROUND_COLOR)
 
     while True:
         clock.tick(SPEED)
