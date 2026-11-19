@@ -212,6 +212,7 @@ def main():
             occupied_positions = snake.positions[:]
             apple.randomize_position(occupied_positions)
             occupied_positions.append(apple.position)
+
             for stone in stones:
                 stone.randomize_position(occupied_positions)
                 occupied_positions.append(stone.position)
