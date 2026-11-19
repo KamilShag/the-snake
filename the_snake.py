@@ -1,4 +1,4 @@
-from random import randint
+from random import choice, randint
 
 import pygame as pg
 
@@ -86,7 +86,7 @@ class Apple(GameObject):
         super().__init__(body_color=body_color)
         self.randomize_position(occupied_positions or [])
 
-    def randomize_position(self, occupied_positions=None):
+    def randomize_position(self, occupied_positions):
         """Перемещает объект в случайную свободную клетку поля."""
         while True:
             self.position = (
@@ -108,6 +108,7 @@ class Snake(GameObject):
     def __init__(self):
         super().__init__(body_color=SNAKE_COLOR)
         self.reset()
+        self.direction = RIGHT
 
     def get_head_position(self):
         """Возвращает координаты головы змейки."""
@@ -136,8 +137,9 @@ class Snake(GameObject):
         """Возвращает змейку в начальное состояние."""
         self.length = 1
         self.positions = [(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)]
-        self.direction = RIGHT
+        self.direction = choice([UP, DOWN, LEFT, RIGHT])
         self.last = None
+
 
     def draw(self):
         """Отрисовывает голову змейки и затирает покинутую клетку."""
