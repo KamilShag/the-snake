@@ -140,7 +140,6 @@ class Snake(GameObject):
         self.direction = choice([UP, DOWN, LEFT, RIGHT])
         self.last = None
 
-
     def draw(self):
         """Отрисовывает голову змейки и затирает покинутую клетку."""
         self.draw_cell(self.get_head_position(), self.body_color, BORDER_COLOR)
